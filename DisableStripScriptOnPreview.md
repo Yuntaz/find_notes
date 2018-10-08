@@ -10,9 +10,10 @@ git clone https://github.com/hpe-idol/haven-search-components.git
 ```
 
 ## File
-	idol\src\main\java\com\hp\autonomy\searchcomponents\idol\view\IdolViewServerService.java
+idol\src\main\java\com\hp\autonomy\searchcomponents\idol\search\HavenSearchAciParameterHandlerImpl.java
 
 ## Line
+Change the True to False in that file and save it
 
 ```  
 	viewParameters.add(ViewParams.StripScript.name(), true);
