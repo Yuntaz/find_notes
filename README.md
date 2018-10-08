@@ -48,10 +48,11 @@ It should be the 5.1 version on the system.
 After testing all the prerequisites, you will be able to build. 
 Open a GitShell terminal and run the following recipe. 
 First, you will need to access the version that you need, in this case, onpremise.
+Master branch contains the whole project with the mayor release. If you need to cover a recent bug, use the dev branch.
+
 ```sh
 $ git clone -b onprem-release/12.1.0 https://github.com/microfocus-idol/find
 $ cd find/webapps
 $ mvn clean package -Pproduction -pl idol,hod -am
 ```
 It will take some minutes, and you will get a JAR to use.
-
