@@ -35,7 +35,6 @@ mvn clean package
 ```
 7. Recompile Find 
 ```
-mvn clean package 
+ mvn clean package -pl idol -am
 ```
-
 8. Test the WAR at C:\Github\find\webapp\idol\target
