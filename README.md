@@ -2,11 +2,11 @@
 We are going to share tips and notes on how to build https://github.com/microfocus-idol/find
 
 ## How do I get IDOL or HOD? 
-- You can access HOD on [Haven Search OnDemand](https://search.havenondemand.com/)
-- If you are an HPE IDOL Express or HPE IDOL Premium customer, Find is available to you in the Microfocus Software Download Center  
+- If you are an HPE IDOL Express or HPE IDOL Premium customer, Find is available to you in the Microfocus Software Download Center
+- HOD is not longer active. 
 
 ## Documentation is on the Wiki  
-Questions about building, running, and configuring Find, plus many more subjects, are all covered on the HPE Idol [GitHub Wiki](https://github.com/microfocus-idol/find/wiki)
+Questions about building, running, and configuring Find, plus many more subjects, are all covered on the Microfocus Idol [GitHub Wiki](https://github.com/microfocus-idol/find/wiki)
 
 ## How to compile it?  
 
@@ -36,6 +36,13 @@ $ echo $JAVA_HOME
 c:\>echo %JAVA_HOME% (Windows)
 ```
 
+##### MAC
+Usually this the path to java home in Mac is /Library/Java/Home, or you can check it like
+```sh
+$/usr/libexec/java_home -V
+export JAVA_HOME=Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home
+```
+
 #### NodeJs  
 Download the NVM (Node version manager). Install it, and in a terminal, run
 ```sh
@@ -51,8 +58,15 @@ First, you will need to access the version that you need, in this case, onpremis
 Master branch contains the whole project with the mayor release. If you need to cover a recent bug, use the dev branch.
 
 ```sh
-$ git clone -b onprem-release/12.1.0 https://github.com/microfocus-idol/find
-$ cd find/webapps
-$ mvn clean package -Pproduction -pl idol,hod -am
+$ git clone https://github.com/microfocus-idol/find.git --branch=onprem-release/12.2.0
+$ cd find/webapp
+```
+Next, you need to get the hash in the env variable GIT_COMMIT
+```
+$ GIT_COMMIT=`git rev-parse --short HEAD`
+$ mvn clean package -Pproduction -pl core,idol,on-prem-dist -am -Dapplication.buildNumber=$GIT_COMMIT -DskipTests
 ```
 It will take some minutes, and you will get a JAR to use.
+
+##### Troubleshooting
+In the version 12.2.0 we found that if you don't add the paramater `-DskipTests` you will see a failure. This is a workaround so far that works.
