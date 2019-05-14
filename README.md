@@ -70,3 +70,18 @@ It will take some minutes, and you will get a JAR to use.
 
 ##### Troubleshooting
 In the version 12.2.0 we found that if you don't add the paramater `-DskipTests` you will see a failure. This is a workaround so far that works.
+
+##### Optmizing on Linux - Create a SWAP disk to better performance
+Recipe to create a swap disk
+```
+sudo dd if=/dev/zero of=/swapfile count=4096 bs=1MiB
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+sudo bash -c "echo '/swapfile   swap    swap    sw  0   0' >> /etc/fstab"
+sudo sysctl vm.swappiness=10
+sudo bash -c "echo 'vm.swappiness = 10' >> /etc/sysctl.conf"
+sudo bash -c "echo 'vm.vfs_cache_pressure = 50' >> /etc/sysctl.conf"
+swapon --summary
+free -h
+```
